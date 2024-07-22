@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Traits\ResponseWithHttp;
 use Illuminate\Http\Request;
+use App\Traits\ResponseWithHttp;
+use Illuminate\Support\Facades\Storage;
 
 class UserProfileController extends Controller
 {
@@ -12,14 +13,19 @@ class UserProfileController extends Controller
     {
         if ($request->hasFile('profile_picture')) 
         {
+            $user = auth()->user();
             $validateImage = $request->validate([
                 'profile_picture' => 'required|image|mimes:jpeg,png,jpg'
             ]);
             $image = $validateImage['profile_picture'];
+            // Check if the user already has a profile picture
+            if ($user->profile_picture) {
+                // Delete the old image from storage
+                Storage::disk('public')->delete($user->profile_picture);
+            }
             $path = $image->store('profile_pictures', 'public');
             
             // Add the profile_picture path to the credentials array
-            $user = auth()->user();
             $user->profile_picture = $path;
             $user->save();
             $image_url = asset('storage/' . $user->profile_picture);
