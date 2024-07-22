@@ -19,16 +19,6 @@ class UserAuthcontroller extends Controller
     {
        
     $validatedData = $request->validated();
-    $path = null;
-    
-    if ($request->hasFile('profile_picture')) 
-    {
-        $image = $request->file('profile_picture');
-        $path = $image->store('profile_pictures', 'public');
-        
-        // Add the profile_picture path to the credentials array
-        $validatedData['profile_picture'] = $path;
-    }
         $validatedData['profile_picture'] = 'profile_pictures/blank-profile-picture-973460_1280.png';   
         $validatedData['password'] = Hash::make($request->password);
         $user = User::create($validatedData);
@@ -47,10 +37,11 @@ class UserAuthcontroller extends Controller
             //token exoires after 1 month if remeber me is checked else it expires after 1 hour
             $token = $user->createToken('api_token', ['*'], $remeber ? now()->addMonth(1): now()->addHours(1));
             $token = $token->plainTextToken;
-            $url = asset('storage/' . $user->profile_picture);
+            $image_url = asset('storage/' . $user->profile_picture);
             $name = $user->user_name;
             $email = $user->email;
-            return $this->respondWithToken($token, ['image_url' => $url, 'user_name' => $name, 'email'=>$email]);
+            $account_type = $user->account_type;
+            return $this->respondWithToken($token, ['image_url' => $image_url, 'user_name' => $name, 'email'=>$email, 'account_type' =>$account_type]);
         }
         return $this->failure("invalid Credentials");
     }
@@ -70,6 +61,7 @@ class UserAuthcontroller extends Controller
             'imge_url' => $data['image_url'],
             'user_name' => $data['user_name'],
             'email' => $data['email'],
+            'account_type' => $data['account_type'],
             'status' => Response::HTTP_ACCEPTED
         ]);
     }
