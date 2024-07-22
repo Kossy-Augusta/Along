@@ -18,8 +18,7 @@ class UserAuthcontroller extends Controller
     public function store(RegisterFormRequest $request)
     {
        
-    $validatedData = $request->validated();
-        $validatedData['profile_picture'] = 'profile_pictures/blank-profile-picture-973460_1280.png';   
+    $validatedData = $request->validated();  
         $validatedData['password'] = Hash::make($request->password);
         $user = User::create($validatedData);
         return response()->json(['message' => 'Registered successfully'], Response::HTTP_CREATED);
