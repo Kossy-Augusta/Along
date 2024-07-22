@@ -1,5 +1,9 @@
 <?php
 
+use Carbon\Laravel\ServiceProvider;
+
+require __DIR__.'/../vendor/autoload.php';
+
 return [
 
     /*
@@ -122,5 +126,6 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
+    
 
 ];
