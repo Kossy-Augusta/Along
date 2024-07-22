@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\ValidImage;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterFormRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +21,10 @@ class RegisterFormRequest extends FormRequest
      */
     public function rules(): array
     {
-         return [
-            'name' => 'required|string',
-            'user_name' => 'required|string',
-            'email' => 'required|email|unique:users,email',
-            'password' => ['required', 'min:8', 'regex:/^(?=.*?[A-Z])(?=.*?[^\w\s]).+$/'],
-            'account_type' => 'required|string'
+        return [
+            "email" => 'required|email',
+            "password" => ['required', 'min:8', 'regex:/^(?=.*?[A-Z])(?=.*?[^\w\s]).+$/'],
+            "offer" => 'boolean'
         ];
     }
 }
