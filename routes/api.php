@@ -8,6 +8,7 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Auth\UserAuthcontroller;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
+use App\Http\Middleware\AccountTYpe;
 
 Route::post('v1/user/sign_up',[UserAuthcontroller::class, 'store']);
 Route::post('v1/user/login', [UserAuthcontroller::class, 'login']);
@@ -15,8 +16,11 @@ Route::post('v1/user/login', [UserAuthcontroller::class, 'login']);
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::post('v1/user/edit-picture', [UserProfileController::class, 'editImage']);
     Route::post('v1/user/logout', [UserAuthcontroller::class, 'destroy']);
-    Route::post('/post/create', [PostController::class, 'create']);
+    
 });
-Route::group(['middleware' => 'auth:sanctum', AdminCheck::class], function(){
+Route::middleware(['auth:sanctum', AdminCheck::class])->group( function(){
     Route::post('/category/create', [CategoryController::class, 'store']);
+});
+Route::middleware(['auth:sanctum', AccountTYpe::class])->group( function(){
+    Route::post('/post/create', [PostController::class, 'store']);
 });
