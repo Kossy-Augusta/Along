@@ -22,7 +22,7 @@ class AdminCheck
         }
         if (!Auth::user()->hasRole('admin'))
         {
-            
+            return response()->json(['message'=> 'User cannot perform request'], 401);
         }
         return $next($request);
     }
