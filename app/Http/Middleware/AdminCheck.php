@@ -20,9 +20,8 @@ class AdminCheck
         {
             return response()->json(['message'=> 'User is not aunthenticated'], 401);
         }
-        if (!Auth::user()->hasRole('admin'))
-        {
-            return response()->json(['message'=> 'User cannot perform request'], 401);
+        if (!Auth::user()->hasRole('admin')) {
+            return response()->json(['message' => 'You do not have admin authorization'], 403);
         }
         return $next($request);
     }
