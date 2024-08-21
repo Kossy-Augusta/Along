@@ -23,7 +23,7 @@ class CreatePostRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
-            'category' => 'required|string',
+            'category' => 'sometimes|string',
             'description' => 'required|string',
             'blog_image' => 'required|image|mimes:jpeg,png,jp',
             "status" => 'required|string'
