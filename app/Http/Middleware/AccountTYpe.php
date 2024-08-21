@@ -20,7 +20,7 @@ class AccountTYpe
         {
             return response()->json(['message'=> 'User is not aunthenticated'], 401);
         }
-        if (Auth::user()->account_type !== 'creator')
+        if (Auth::user()->account_type !== 'Creator')
         {
             return response()->json(['message'=> 'User cannot perform request'], 401);
         }
