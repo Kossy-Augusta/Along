@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('account_types_id')->constrained()->onDelete('cascade');
+            $table->string('account_type');
         });
     }
 
@@ -22,8 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['account_types_id']);
-            $table->dropColumn('account_types_id');
+            $table->dropColumn('account_type');
         });
     }
 };
