@@ -14,7 +14,8 @@ class Post extends Model
         'title',
         'description', 
         'blog_image',
-        'status'
+        'status',
+        'category'
     ];
     public function users(): BelongsTo
     {
