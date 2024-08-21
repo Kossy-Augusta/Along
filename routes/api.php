@@ -22,5 +22,6 @@ Route::middleware(['auth:sanctum', AdminCheck::class])->group( function(){
     Route::post('/category/create', [CategoryController::class, 'store']);
 });
 Route::middleware(['auth:sanctum', AccountTYpe::class])->group( function(){
+    Route::get('/post/index', [PostController::class, 'index']);
     Route::post('/post/create', [PostController::class, 'store']);
 });
