@@ -14,7 +14,7 @@ class AccountTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        AccountType::firstOrCreate(['type' => 'user']);
-        AccountType::firstOrCreate(['type' => 'creator']);
+        AccountType::firstOrCreate(['type' => 'User']);
+        AccountType::firstOrCreate(['type' => 'Creator']);
     }
 }
