@@ -18,8 +18,8 @@ class AdminUserSeeder extends Seeder
             'name' => 'Admin User',
             'user_name' => 'admin',
             'email' => 'admin@user.com',
-            'passwotd' => Hash::make('Kosisochukwu@'),
-            'account_type' => '',
+            'password' => Hash::make('Kosisochukwu@'),
+            'account_types_id' => 1,
             'user_name' => 'admin'
         ]);
 
