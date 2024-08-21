@@ -17,7 +17,7 @@ class UserAuthcontroller extends Controller
     use ResponseWithHttp;
     public function store(RegisterFormRequest $request)
     {
-        $validatedData = $request->validated();  
+        $validatedData = $request->validated(); 
         $validatedData['password'] = Hash::make($request->password);
         $user = User::create($validatedData);
         return response()->json(['message' => 'Registered successfully'], Response::HTTP_CREATED);
