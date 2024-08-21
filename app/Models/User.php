@@ -55,6 +55,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+    public function drafts(): HasMany
+    {
+        return $this->hasMany(Draft::class);
+    }
     public function account()
     {
         return $this->belongsTo(AccountType::class);
