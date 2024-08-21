@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('description');
             $table->string('blog_image');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('category')->nullable();
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -26,6 +28,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::table('posts', function (Blueprint $table) {
+            Schema::dropIfExists('posts');
+        });
     }
 };
