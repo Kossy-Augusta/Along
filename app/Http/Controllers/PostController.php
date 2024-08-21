@@ -32,13 +32,20 @@ class PostController extends Controller
         $credentials['blog_image'] = $path;
         $categoryName = $request->input('category');
         $categoryId = Category::where('name', $categoryName)->pluck('id')->first();
-        if ($categoryId)
+        if ($categoryId && $credentials['status'] == 'publish')
         {
             $user = auth()->user();
             $post = $user->posts()->create($credentials);
             $post->category()->sync([$categoryId]);
             
             return response()->json(['message'=> 'Post created successfully']);
+        }
+        else if($categoryId &&  $credentials['status'] == 'draft')
+        {
+            $user = auth()->user();
+            $post = $user->drafts()->create($credentials);
+            
+            return response()->json(['message'=> 'Post successfully saved to drafts']);
         }
         else
         {
