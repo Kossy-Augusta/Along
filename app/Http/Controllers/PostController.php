@@ -21,7 +21,7 @@ class PostController extends Controller
         $posts = new Post;
         $post = $posts->where('user_id', $user->id )->get();
         $count = $post->count();
-        return response()->json(['post_count' => $count, 'posts' => UserPostsResource::collection($post), ]);
+        return response()->json(['post_count' => $count, 'posts' => UserPostsResource::collection($post),Response::HTTP_ACCEPTED]);
 
     }
     public function store(CreatePostRequest $request)
