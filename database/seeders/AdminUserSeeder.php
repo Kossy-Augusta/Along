@@ -18,8 +18,9 @@ class AdminUserSeeder extends Seeder
             'name' => 'Admin User',
             'user_name' => 'admin',
             'email' => 'admin@user.com',
-            'password' => Hash::make('password'),
-            'account_type' => 'user'
+            'passwotd' => Hash::make('Kosisochukwu@'),
+            'account_type' => '',
+            'user_name' => 'admin'
         ]);
 
         $admin_user->assignRole('admin');

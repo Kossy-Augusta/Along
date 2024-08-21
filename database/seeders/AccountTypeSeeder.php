@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\AccountType;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -13,9 +14,7 @@ class AccountTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('account_type')->insert([
-            ['type'=>'user'],
-            ['type'=>'creator']
-        ]);
+        AccountType::firstOrCreate(['type' => 'user']);
+        AccountType::firstOrCreate(['type' => 'creator']);
     }
 }
