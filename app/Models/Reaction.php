@@ -9,7 +9,11 @@ class Reaction extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['type'];
+    protected $fillable = [
+        'type',
+        'post_id',
+        'user_id'
+    ];
     
     public function post()
     {
