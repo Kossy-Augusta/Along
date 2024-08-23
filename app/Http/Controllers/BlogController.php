@@ -25,9 +25,8 @@ class BlogController extends Controller
         return $this->success('Success', CategoryResource::collection($categories));
         
     }
-    public function singleCategory(Request $request)
+    public function singleCategory(Request $request, $category_id)
     {
-        $category_id= $request->input('category_id');
         $posts = Post::whereHas('category', function(Builder $q) use($category_id){
             $q->where('category_id', $category_id);
         })->get();
@@ -72,4 +71,5 @@ class BlogController extends Controller
             return $this->failure('Unable to create new comment');
         }
     }
+    
 }
