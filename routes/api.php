@@ -21,6 +21,7 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::get('blog/home', [BlogController::class, 'index']);
     Route::post('blog/single_page', [BlogController::class, 'singleCategory']);
     Route::get('blog/single_post/{id}', [BlogController::class, 'show']);
+    Route::post('blog/creat_comment/{id}', [BlogController::class, 'createComment']);
 });
 Route::middleware(['auth:sanctum', AdminCheck::class])->group( function(){
     Route::post('/category/create', [CategoryController::class, 'store']);
