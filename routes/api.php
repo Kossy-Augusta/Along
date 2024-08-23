@@ -19,7 +19,7 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::post('v1/user/edit-picture', [UserProfileController::class, 'editImage']);
     Route::post('v1/user/logout', [UserAuthcontroller::class, 'destroy']);
     Route::get('blog/home', [BlogController::class, 'index']);
-    Route::post('blog/single_page', [BlogController::class, 'singleCategory']);
+    Route::get('blog/single_page/{id}', [BlogController::class, 'singleCategory']);
     Route::get('blog/single_post/{id}', [BlogController::class, 'show']);
     Route::post('blog/creat_comment/{id}', [BlogController::class, 'createComment']);
 });
