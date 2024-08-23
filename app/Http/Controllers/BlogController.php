@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Traits\ResponseWithHttp;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\SingleCategoryPostResource;
+use App\Http\Resources\SinglePostResource;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
 class BlogController extends Controller
@@ -28,4 +29,21 @@ class BlogController extends Controller
 
         return response()->json(['data' => SingleCategoryPostResource::collection($posts)]);
     }
+    
+    /**
+     * Get details of a single post
+     * @return response
+     */
+
+     public function show($id)
+     {
+         $post = Post::findOrFail($id);
+         $data = [
+            'title' => $post->title,
+            'author' => $post->user->name,
+            'post_date' => $post->updated_at,
+            'description' => $post->description,
+         ];
+        return response()->json(['data' => $data]);
+     }
 }
