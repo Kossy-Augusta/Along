@@ -63,4 +63,12 @@ class User extends Authenticatable
     {
         return $this->belongsTo(AccountType::class);
     }
+    public function reaction()
+    {
+        return $this->hasMany(Reaction::class);
+    }
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
