@@ -18,6 +18,6 @@ class DraftIndexResource extends JsonResource
             'post_date' => $this->updated_at,
             'category' => $this->category,
             'title' => $this->title
-        ];;
+        ];
     }
 }
