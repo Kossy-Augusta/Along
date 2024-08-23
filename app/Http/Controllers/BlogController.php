@@ -35,15 +35,17 @@ class BlogController extends Controller
      * @return response
      */
 
-     public function show($id)
-     {
-         $post = Post::findOrFail($id);
-         $data = [
-            'title' => $post->title,
-            'author' => $post->user->name,
-            'post_date' => $post->updated_at,
-            'description' => $post->description,
-         ];
-        return response()->json(['data' => $data]);
-     }
+    public function show($id)
+    {
+        $post = Post::findOrFail($id);
+        $data = [
+        'title' => $post->title,
+        'author' => $post->user->name,
+        'post_date' => $post->updated_at,
+        'description' => $post->description,
+        ];
+    return response()->json(['data' => $data]);
+    }
+    
+    
 }
