@@ -10,6 +10,7 @@ use App\Http\Controllers\DraftController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Auth\UserAuthcontroller;
+use App\Http\Controllers\BlogController;
 
 Route::post('v1/user/sign_up',[UserAuthcontroller::class, 'store']);
 Route::post('v1/user/login', [UserAuthcontroller::class, 'login']);
@@ -17,7 +18,8 @@ Route::post('v1/user/login', [UserAuthcontroller::class, 'login']);
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::post('v1/user/edit-picture', [UserProfileController::class, 'editImage']);
     Route::post('v1/user/logout', [UserAuthcontroller::class, 'destroy']);
-    
+    Route::get('blog/home', [BlogController::class, 'index']);
+    Route::post('blog/single_page', [BlogController::class, 'singleCategory']);
 });
 Route::middleware(['auth:sanctum', AdminCheck::class])->group( function(){
     Route::post('/category/create', [CategoryController::class, 'store']);
