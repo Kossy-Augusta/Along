@@ -73,7 +73,7 @@ class BlogController extends Controller
         }
     }
     /**
-     * Get all comments
+     * Get all comments related to a post
      */
     public function getPostComment($id)
     {
