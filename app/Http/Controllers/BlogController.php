@@ -12,6 +12,7 @@ use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\CategoryResource;
+use App\Http\Resources\CommentResource;
 use App\Http\Resources\SinglePostResource;
 use App\Http\Resources\SingleCategoryPostResource;
 use Illuminate\Contracts\Database\Eloquent\Builder;
@@ -71,5 +72,20 @@ class BlogController extends Controller
             return $this->failure('Unable to create new comment');
         }
     }
-    
+    /**
+     * Get all comments
+     */
+    public function getPostComment($id)
+    {
+        $comment = Comment::whereHas('post', function (Builder $q) use($id)
+        {
+            $q->where('post_id', $id);
+        })->get();
+        if($comment->isNotEmpty())
+        {
+
+            return response()->json(['data' => CommentResource::collection($comment)]);
+        }
+        return response('No comments available for this post');
+    }
 }
