@@ -11,6 +11,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Auth\UserAuthcontroller;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CommentReactionController;
 
 Route::post('v1/user/sign_up',[UserAuthcontroller::class, 'store']);
 Route::post('v1/user/login', [UserAuthcontroller::class, 'login']);
@@ -21,8 +22,9 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::get('blog/home', [BlogController::class, 'index']);
     Route::get('blog/single_page/{id}', [BlogController::class, 'singleCategory']);
     Route::get('blog/single_post/{id}', [BlogController::class, 'show']);
-    Route::post('blog/creat_comment/{id}', [BlogController::class, 'createComment']);
-    Route::get('blog/post_comment/{id}', [BlogController::class, 'getPostComment']);
+    Route::post('blog/create_comment/{id}', [CommentReactionController::class, 'createComment']);
+    Route::get('blog/post_comment/{id}', [CommentReactionController::class, 'getPostComment']);
+    Route::post('blog/create_reaction/{id}', [CommentReactionController::class, 'createReaction']);
 });
 Route::middleware(['auth:sanctum', AdminCheck::class])->group( function(){
     Route::post('/category/create', [CategoryController::class, 'store']);
