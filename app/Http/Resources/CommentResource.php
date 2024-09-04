@@ -27,32 +27,33 @@ class CommentResource extends JsonResource
 
     protected function formatDate(Carbon $date)
 {
-    $now = Carbon::now();
-    if ($date->isFuture()) {
-        return 'In the future';
-    }
-    $diffInSecs = $date->diffInSeconds($now);
-    $diffInMinutes = $date->diffInMinutes($now);
-    $diffInHours = $date->diffInHours($now);
-    $diffInDays = $date->diffInDays($now);
-    $diffInWeeks = $date->diffInWeeks($now);
-    $diffInMonths = $date->diffInMonths($now);
-    $diffInYears = $date->diffInYears($now);
+    return $date->diffForHumans();
+    // $now = Carbon::now();
+    // if ($date->isFuture()) {
+    //     return 'In the future';
+    // }
+    // $diffInSecs = $date->diffInSeconds($now);
+    // $diffInMinutes = $date->diffInMinutes($now);
+    // $diffInHours = $date->diffInHours($now);
+    // $diffInDays = $date->diffInDays($now);
+    // $diffInWeeks = $date->diffInWeeks($now);
+    // $diffInMonths = $date->diffInMonths($now);
+    // $diffInYears = $date->diffInYears($now);
 
-    if ($diffInSecs < 60) {
-        return floor($diffInSecs) . ' sec(s) ago';
-    } elseif ($diffInMinutes < 60) {
-        return floor($diffInMinutes) . ' minute(s) ago';
-    } elseif ($diffInHours < 24) {
-        return floor($diffInHours) . ' hour(s) ago';
-    } elseif ($diffInDays < 7) {
-        return floor($diffInDays) . ' day(s) ago';
-    } elseif ($diffInWeeks < 5) {
-        return floor($diffInWeeks) . ' week(s) ago';
-    } elseif ($diffInMonths < 12) {
-        return floor($diffInMonths) . ' month(s) ago';
-    } else {
-        return floor($diffInYears) . ' year(s) ago';
-    }
+    // if ($diffInSecs < 60) {
+    //     return floor($diffInSecs) . ' sec(s) ago';
+    // } elseif ($diffInMinutes < 60) {
+    //     return floor($diffInMinutes) . ' minute(s) ago';
+    // } elseif ($diffInHours < 24) {
+    //     return floor($diffInHours) . ' hour(s) ago';
+    // } elseif ($diffInDays < 7) {
+    //     return $date->diffForHumans();
+    // } elseif ($diffInWeeks < 5) {
+    //     return floor($diffInWeeks) . ' week(s) ago';
+    // } elseif ($diffInMonths < 12) {
+    //     return floor($diffInMonths) . ' month(s) ago';
+    // } else {
+    //     return floor($diffInYears) . ' year(s) ago';
+    // }
 }
 }
